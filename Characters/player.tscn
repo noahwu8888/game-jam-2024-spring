@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcu48fu3o1erv"]
+
+[ext_resource type="Texture2D" uid="uid://dqa218giik488" path="res://icon.svg" id="1_f67gv"]
+[ext_resource type="Script" path="res://Characters/player.gd" id="1_x6322"]
+[ext_resource type="Script" path="res://Characters/segment_lerp.gd" id="3_ejxyd"]
+[ext_resource type="Script" path="res://Characters/player2.gd" id="3_kryqy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nignx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_elgeh"]
+size = Vector2(20, 51)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_x6322")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nignx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.933333, 0.45098, 0.745098, 1)
+position = Vector2(0.25, 7.15256e-07)
+scale = Vector2(0.167969, 0.171875)
+texture = ExtResource("1_f67gv")
+
+[node name="Segment 1" type="DampedSpringJoint2D" parent="."]
+node_a = NodePath("..")
+node_b = NodePath("Segment 1 Col")
+bias = 0.9
+stiffness = 0.1
+
+[node name="Segment 1 Col" type="RigidBody2D" parent="Segment 1" node_paths=PackedStringArray("prev_node")]
+position = Vector2(0, 50)
+gravity_scale = 0.0
+script = ExtResource("3_ejxyd")
+prev_node = NodePath("../../CollisionShape2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="Segment 1/Segment 1 Col"]
+scale = Vector2(0.125, 0.136719)
+texture = ExtResource("1_f67gv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment 1/Segment 1 Col"]
+position = Vector2(0, -17)
+shape = SubResource("RectangleShape2D_elgeh")
+
+[node name="Segment 2" type="DampedSpringJoint2D" parent="."]
+position = Vector2(0, 50)
+node_a = NodePath("../Segment 1/Segment 1 Col")
+node_b = NodePath("Segment 2 Col")
+bias = 0.9
+stiffness = 0.1
+
+[node name="Segment 2 Col" type="RigidBody2D" parent="Segment 2" node_paths=PackedStringArray("prev_node")]
+position = Vector2(0, 51)
+gravity_scale = 0.0
+script = ExtResource("3_ejxyd")
+prev_node = NodePath("../../Segment 1/Segment 1 Col")
+
+[node name="Sprite2D" type="Sprite2D" parent="Segment 2/Segment 2 Col"]
+scale = Vector2(0.125, 0.136719)
+texture = ExtResource("1_f67gv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment 2/Segment 2 Col"]
+position = Vector2(0, -17)
+shape = SubResource("RectangleShape2D_elgeh")
+
+[node name="Segment 3" type="DampedSpringJoint2D" parent="."]
+position = Vector2(0, 100)
+node_a = NodePath("../Segment 2/Segment 2 Col")
+node_b = NodePath("Segment 3 Col")
+bias = 0.9
+stiffness = 0.1
+
+[node name="Segment 3 Col" type="RigidBody2D" parent="Segment 3" node_paths=PackedStringArray("prev_node")]
+position = Vector2(0, 51)
+gravity_scale = 0.0
+script = ExtResource("3_ejxyd")
+prev_node = NodePath("../../Segment 2/Segment 2 Col")
+
+[node name="Sprite2D" type="Sprite2D" parent="Segment 3/Segment 3 Col"]
+scale = Vector2(0.125, 0.136719)
+texture = ExtResource("1_f67gv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment 3/Segment 3 Col"]
+position = Vector2(0, -17)
+shape = SubResource("RectangleShape2D_elgeh")
+
+[node name="Segment 4" type="DampedSpringJoint2D" parent="."]
+position = Vector2(0, 150)
+node_a = NodePath("../Segment 3/Segment 3 Col")
+node_b = NodePath("RigidBody2D")
+bias = 0.9
+stiffness = 0.1
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Segment 4"]
+gravity_scale = 0.0
+script = ExtResource("3_kryqy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment 4/RigidBody2D"]
+position = Vector2(0, 51)
+shape = SubResource("CircleShape2D_nignx")
+
+[node name="Sprite2D" type="Sprite2D" parent="Segment 4/RigidBody2D"]
+modulate = Color(0.933333, 0.45098, 0.745098, 1)
+position = Vector2(0.25, 51)
+scale = Vector2(0.167969, 0.171875)
+texture = ExtResource("1_f67gv")
