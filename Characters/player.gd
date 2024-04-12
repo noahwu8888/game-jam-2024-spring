@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-
-# @onready var tail_body:CharacterBody2D = $"Segment 4/CharacterBody2D"
+@export var player_num: String = "p1"
+@onready var tail_body:RigidBody2D = $"Segment 4/PlayerTail"
 # Player speed and dash settings
 @export var max_speed: float = 200.0  # Maximum speed of the player
 @export var dash_speed: float = 1000.0  # Initial speed of the dash
@@ -17,11 +17,14 @@ extends CharacterBody2D
 var is_dashing: bool = false
 var dash_direction: Vector2 = Vector2.ZERO
 
+func _ready():
+	tail_body.player_num = player_num
+
 func _physics_process(delta: float) -> void:
 	var input_vector: Vector2 = Vector2.ZERO
 	
-	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	input_vector.x = Input.get_action_strength(player_num + "_move_right") - Input.get_action_strength(player_num + "_move_left")
+	input_vector.y = Input.get_action_strength(player_num + "_move_down") - Input.get_action_strength(player_num + "_move_up")
 	input_vector = input_vector.normalized()
 
 		# Apply stop drag if not moving

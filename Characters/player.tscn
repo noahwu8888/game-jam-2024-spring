@@ -83,20 +83,20 @@ shape = SubResource("RectangleShape2D_elgeh")
 [node name="Segment 4" type="DampedSpringJoint2D" parent="."]
 position = Vector2(0, 75)
 node_a = NodePath("../Segment 3/Segment 3 Col")
-node_b = NodePath("RigidBody2D")
+node_b = NodePath("PlayerTail")
 bias = 0.9
 length = 25.0
 stiffness = 64.0
 
-[node name="RigidBody2D" type="RigidBody2D" parent="Segment 4"]
+[node name="PlayerTail" type="RigidBody2D" parent="Segment 4"]
 position = Vector2(1, 26)
 gravity_scale = 0.0
 script = ExtResource("3_kryqy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment 4/RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment 4/PlayerTail"]
 shape = SubResource("CircleShape2D_nignx")
 
-[node name="Sprite2D" type="Sprite2D" parent="Segment 4/RigidBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Segment 4/PlayerTail"]
 modulate = Color(0.933333, 0.45098, 0.745098, 1)
 scale = Vector2(0.167969, 0.171875)
 texture = ExtResource("1_f67gv")

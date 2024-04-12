@@ -2,24 +2,21 @@ extends RigidBody2D
 
 # Player speed and dash settings
 @export var max_speed: float = 500.0  # Maximum speed of the player
-@export var dash_speed: float = 1000.0  # Initial speed of the dash
-@export var dash_control: float = 10.0
+
 
 # Drag and acceleration settings
-@export var dash_drag: float = 20.0  # How quickly the player slows down from a dash
 @export var stop_drag: float = 2.0  # How quickly the player stops when no input is given
 @export var max_acceleration: float = 3000.0  # Maximum rate of acceleration
 
 # Internal variables for movement and dashing
-var is_dashing: bool = false
-var dash_direction: Vector2 = Vector2.ZERO
+var player_num: String
 
 func _physics_process(delta: float) -> void:
 	var input_vector: Vector2 = Vector2.ZERO
 	
 	# Getting the directional input from the player
-	input_vector.x = Input.get_action_strength("move_right2") - Input.get_action_strength("move_left2")
-	input_vector.y = Input.get_action_strength("move_down2") - Input.get_action_strength("move_up2")
+	input_vector.x = Input.get_action_strength(player_num + "_move_right2") - Input.get_action_strength(player_num + "_move_left2")
+	input_vector.y = Input.get_action_strength(player_num + "_move_down2") - Input.get_action_strength(player_num + "_move_up2")
 	input_vector = input_vector.normalized()
 
 	# Calculate target velocity based on input direction
