@@ -7,7 +7,7 @@ var segments = Array()
 
 
 # Player speed and dash settings
-@export var max_speed: float = 200.0  # Maximum speed of the player
+@export var max_speed: float = 400.0  # Maximum speed of the player
 @export var dash_speed: float = 1500.0  # Initial speed of the dash
 @export var dash_control: float = 20.0
 
@@ -25,6 +25,8 @@ var dash_direction: Vector2 = Vector2.ZERO
 @onready var disable_delay_timer:Timer = $"DisableSegmentTimer"
 var disable_delay_count = 0
 var disable_delay_iterate = false
+@onready var reenable_delay_timer:Timer = $"ReenableSegmentTimer"
+var reenable_delay_count = 0
 var reenable_delay_iterate = false
 
 func _ready():
@@ -99,11 +101,12 @@ func start_dash(direction: Vector2):
 	disable_delay_iterate = true
 
 func handle_disable_delay():
-	if disable_delay_iterate || reenable_delay_iterate:
+	if disable_delay_iterate:
 		if disable_delay_timer.is_stopped():
 			disable_delay_timer.start()
 	elif reenable_delay_iterate:
-		pass
+		if reenable_delay_timer.is_stopped():
+			reenable_delay_timer.start()
 
 
 
@@ -117,9 +120,20 @@ func _on_disable_segment_timer_timeout():
 		disable_delay_timer.stop()
 		disable_delay_count = 0
 		disable_delay_iterate = false
-		reenable_delay_iterate = false
 		
-
+		
+func _on_reenable_segment_timer_timeout():
+	if reenable_delay_count < segments.size():
+		print(reenable_delay_count)
+		segments[reenable_delay_count].disabled = !segments[reenable_delay_count].disabled
+		reenable_delay_count += 1
+	else:
+		print("Stopped")
+		reenable_delay_timer.stop()
+		reenable_delay_count = 0
+		reenable_delay_iterate = false
 
 func _on_dash_cooldown_timeout():
 	can_dash = true
+
+

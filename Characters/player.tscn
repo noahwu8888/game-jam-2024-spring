@@ -20,6 +20,10 @@ one_shot = true
 process_callback = 0
 wait_time = 0.1
 
+[node name="ReenableSegmentTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_nignx")
 
@@ -38,6 +42,7 @@ stiffness = 64.0
 [node name="Segment 1 Col" type="RigidBody2D" parent="Segment 1"]
 position = Vector2(0, 50)
 gravity_scale = 0.0
+lock_rotation = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Segment 1/Segment 1 Col"]
 position = Vector2(0, -25)
@@ -59,6 +64,7 @@ stiffness = 64.0
 [node name="Segment 2 Col" type="RigidBody2D" parent="Segment 2"]
 position = Vector2(0, 25)
 gravity_scale = 0.0
+lock_rotation = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Segment 2/Segment 2 Col"]
 scale = Vector2(0.125, 0.136719)
@@ -78,6 +84,7 @@ stiffness = 64.0
 [node name="Segment 3 Col" type="RigidBody2D" parent="Segment 3"]
 position = Vector2(0, 25)
 gravity_scale = 0.0
+lock_rotation = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Segment 3/Segment 3 Col"]
 scale = Vector2(0.125, 0.136719)
@@ -98,6 +105,7 @@ stiffness = 64.0
 [node name="PlayerTail" type="RigidBody2D" parent="Segment 4"]
 position = Vector2(1, 26)
 gravity_scale = 0.0
+lock_rotation = true
 script = ExtResource("3_kryqy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Segment 4/PlayerTail"]
@@ -110,3 +118,4 @@ texture = ExtResource("1_f67gv")
 
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="DisableSegmentTimer" to="." method="_on_disable_segment_timer_timeout"]
+[connection signal="timeout" from="ReenableSegmentTimer" to="." method="_on_reenable_segment_timer_timeout"]
