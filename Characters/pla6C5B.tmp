@@ -12,20 +12,17 @@ size = Vector2(20, 20.5)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_x6322")
 
-[node name="DashCooldown" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [node name="DisableSegmentTimer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 0.1
+wait_time = 0.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_nignx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.933333, 0.45098, 0.745098, 1)
-scale = Vector2(0.1, 0.1)
+position = Vector2(0.25, 7.15256e-07)
+scale = Vector2(0.167969, 0.171875)
 texture = ExtResource("1_f67gv")
 
 [node name="Segment 1" type="DampedSpringJoint2D" parent="."]
@@ -105,8 +102,7 @@ shape = SubResource("CircleShape2D_nignx")
 
 [node name="Sprite2D" type="Sprite2D" parent="Segment 4/PlayerTail"]
 modulate = Color(0.933333, 0.45098, 0.745098, 1)
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.167969, 0.171875)
 texture = ExtResource("1_f67gv")
 
-[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="DisableSegmentTimer" to="." method="_on_disable_segment_timer_timeout"]
