@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var head_sprite = $HeadSprite
+
 #Tail and segments
 @export var player_num: String = "p1"
 @onready var tail_body:RigidBody2D = $"Segment 4/PlayerTail"
@@ -41,6 +43,7 @@ func _ready():
 				for subSubChild in subChild.get_children():
 					if subSubChild is CollisionShape2D:
 						segments.append(subSubChild)
+		
 
 
 func _physics_process(delta: float) -> void:
@@ -75,7 +78,7 @@ func _physics_process(delta: float) -> void:
 			reenable_delay_iterate = true
 			
 
-
+	update_facing_direction()
 	handle_disable_delay()
 	move_and_slide()
 	
@@ -107,6 +110,10 @@ func handle_disable_delay():
 	elif reenable_delay_iterate:
 		if reenable_delay_timer.is_stopped():
 			reenable_delay_timer.start()
+			
+func update_facing_direction():
+	if velocity.length() > 0:  # Ensure there is movement
+		head_sprite.rotation = velocity.angle()
 
 
 

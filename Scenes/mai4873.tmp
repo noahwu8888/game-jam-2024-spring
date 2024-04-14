@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj032pb7i6qnl"]
+
+[ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="1_580ae"]
+[ext_resource type="PackedScene" uid="uid://bcu48fu3o1erv" path="res://Characters/player.tscn" id="1_pucg1"]
+[ext_resource type="Texture2D" uid="uid://bgrwg3hakm5st" path="res://art/background/dirt.png" id="2_rad5m"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+limit_left = -2000
+limit_top = -2000
+limit_right = 2000
+limit_bottom = 2000
+script = ExtResource("1_580ae")
+target = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("1_pucg1")]
+
+[node name="Dirt" type="Sprite2D" parent="."]
+z_index = -1
+texture_repeat = 2
+texture = ExtResource("2_rad5m")
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 2000)

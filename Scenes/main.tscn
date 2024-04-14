@@ -1,7 +1,59 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj032pb7i6qnl"]
+[gd_scene load_steps=5 format=3 uid="uid://bj032pb7i6qnl"]
 
+[ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="1_580ae"]
 [ext_resource type="PackedScene" uid="uid://bcu48fu3o1erv" path="res://Characters/player.tscn" id="1_pucg1"]
+[ext_resource type="Texture2D" uid="uid://bgrwg3hakm5st" path="res://art/background/dirt.png" id="2_rad5m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fadba"]
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+limit_left = -1000
+limit_top = -1000
+limit_right = 1000
+limit_bottom = 1000
+limit_smoothed = true
+script = ExtResource("1_580ae")
+target = NodePath("../Player")
+
 [node name="Player" parent="." instance=ExtResource("1_pucg1")]
+
+[node name="Dirt" type="Sprite2D" parent="."]
+z_index = -1
+texture_repeat = 2
+texture = ExtResource("2_rad5m")
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 2000)
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(-1010, 0)
+scale = Vector2(1, 110)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_fadba")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1010, 0)
+scale = Vector2(1, 110)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_fadba")
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+position = Vector2(0, -1010)
+scale = Vector2(110, 1)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+shape = SubResource("RectangleShape2D_fadba")
+
+[node name="BottomWall" type="StaticBody2D" parent="."]
+position = Vector2(0, 1010)
+scale = Vector2(110, 1)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+shape = SubResource("RectangleShape2D_fadba")

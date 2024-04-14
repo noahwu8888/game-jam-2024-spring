@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcu48fu3o1erv"]
+[gd_scene load_steps=7 format=3 uid="uid://bcu48fu3o1erv"]
 
 [ext_resource type="Texture2D" uid="uid://dqa218giik488" path="res://icon.svg" id="1_f67gv"]
 [ext_resource type="Script" path="res://Characters/player.gd" id="1_x6322"]
+[ext_resource type="Script" path="res://Characters/segment_face.gd" id="3_5rki2"]
 [ext_resource type="Script" path="res://Characters/player2.gd" id="3_kryqy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nignx"]
@@ -10,6 +11,7 @@
 size = Vector2(20, 20.5)
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 3
 script = ExtResource("1_x6322")
 
 [node name="DashCooldown" type="Timer" parent="."]
@@ -24,11 +26,12 @@ wait_time = 0.1
 process_callback = 0
 wait_time = 0.1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="HeadCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_nignx")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="HeadSprite" type="Sprite2D" parent="."]
 modulate = Color(0.933333, 0.45098, 0.745098, 1)
+light_mask = 0
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_f67gv")
 
@@ -39,18 +42,19 @@ bias = 0.9
 length = 25.0
 stiffness = 64.0
 
-[node name="Segment 1 Col" type="RigidBody2D" parent="Segment 1"]
-position = Vector2(0, 50)
+[node name="Segment 1 Col" type="RigidBody2D" parent="Segment 1" node_paths=PackedStringArray("prev_segment")]
+position = Vector2(0, 25)
+collision_mask = 3
 gravity_scale = 0.0
 lock_rotation = true
+script = ExtResource("3_5rki2")
+prev_segment = NodePath("../../HeadCollision")
 
 [node name="Sprite2D" type="Sprite2D" parent="Segment 1/Segment 1 Col"]
-position = Vector2(0, -25)
 scale = Vector2(0.125, 0.136719)
 texture = ExtResource("1_f67gv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Segment 1/Segment 1 Col"]
-position = Vector2(0, -25)
 shape = SubResource("RectangleShape2D_elgeh")
 
 [node name="Segment 2" type="DampedSpringJoint2D" parent="."]
@@ -61,10 +65,13 @@ bias = 0.9
 length = 25.0
 stiffness = 64.0
 
-[node name="Segment 2 Col" type="RigidBody2D" parent="Segment 2"]
+[node name="Segment 2 Col" type="RigidBody2D" parent="Segment 2" node_paths=PackedStringArray("prev_segment")]
 position = Vector2(0, 25)
+collision_mask = 3
 gravity_scale = 0.0
 lock_rotation = true
+script = ExtResource("3_5rki2")
+prev_segment = NodePath("../../Segment 1/Segment 1 Col")
 
 [node name="Sprite2D" type="Sprite2D" parent="Segment 2/Segment 2 Col"]
 scale = Vector2(0.125, 0.136719)
@@ -81,10 +88,13 @@ bias = 0.9
 length = 25.0
 stiffness = 64.0
 
-[node name="Segment 3 Col" type="RigidBody2D" parent="Segment 3"]
+[node name="Segment 3 Col" type="RigidBody2D" parent="Segment 3" node_paths=PackedStringArray("prev_segment")]
 position = Vector2(0, 25)
+collision_mask = 3
 gravity_scale = 0.0
 lock_rotation = true
+script = ExtResource("3_5rki2")
+prev_segment = NodePath("../../Segment 2/Segment 2 Col")
 
 [node name="Sprite2D" type="Sprite2D" parent="Segment 3/Segment 3 Col"]
 scale = Vector2(0.125, 0.136719)
@@ -104,6 +114,7 @@ stiffness = 64.0
 
 [node name="PlayerTail" type="RigidBody2D" parent="Segment 4"]
 position = Vector2(1, 26)
+collision_mask = 3
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("3_kryqy")
