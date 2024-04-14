@@ -15,9 +15,10 @@ func _physics_process(delta: float) -> void:
 	var input_vector: Vector2 = Vector2.ZERO
 	
 	# Getting the directional input from the player
-	input_vector.x = Input.get_action_strength(player_num + "_move_right2") - Input.get_action_strength(player_num + "_move_left2")
-	input_vector.y = Input.get_action_strength(player_num + "_move_down2") - Input.get_action_strength(player_num + "_move_up2")
-	input_vector = input_vector.normalized()
+	if GameManager.can_move:
+		input_vector.x = Input.get_action_strength(player_num + "_move_right2") - Input.get_action_strength(player_num + "_move_left2")
+		input_vector.y = Input.get_action_strength(player_num + "_move_down2") - Input.get_action_strength(player_num + "_move_up2")
+		input_vector = input_vector.normalized()
 
 	# Calculate target velocity based on input direction
 	var target_velocity = input_vector * max_speed

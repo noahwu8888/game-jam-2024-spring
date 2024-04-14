@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+
 @onready var head_sprite = $HeadSprite
 @onready var head = $"."
 #Tail and segments
@@ -49,9 +50,10 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	var input_vector: Vector2 = Vector2.ZERO
 	
-	input_vector.x = Input.get_action_strength(player_num + "_move_right") - Input.get_action_strength(player_num + "_move_left")
-	input_vector.y = Input.get_action_strength(player_num + "_move_down") - Input.get_action_strength(player_num + "_move_up")
-	input_vector = input_vector.normalized()
+	if GameManager.can_move:
+		input_vector.x = Input.get_action_strength(player_num + "_move_right") - Input.get_action_strength(player_num + "_move_left")
+		input_vector.y = Input.get_action_strength(player_num + "_move_down") - Input.get_action_strength(player_num + "_move_up")
+		input_vector = input_vector.normalized()
 
 		# Apply stop drag if not moving
 	if not is_dashing:
@@ -156,3 +158,4 @@ func _on_dash_cooldown_timeout():
 func _on_player_tail_body_entered(body):
 	if(body is CharacterBody2D and body != head):
 		print("End Game")
+		GameManager.end_game()
