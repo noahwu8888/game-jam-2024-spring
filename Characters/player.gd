@@ -32,9 +32,11 @@ var disable_delay_iterate = false
 var reenable_delay_count = 0
 var reenable_delay_iterate = false
 
+#sounds
+@onready var dig_sound = $Digging
+
 func _ready():
 	tail_body.player_num = player_num
-	
 	segments.append(self)
 	for child in self.get_children():
 		if child is RigidBody2D:
@@ -79,8 +81,17 @@ func _physics_process(delta: float) -> void:
 		if velocity_in_dash_direction <= max_speed:
 			is_dashing = false  # Stop dashing once the component of velocity in dash direction is at or below max_speed
 			reenable_delay_iterate = true
-			
-
+	if(player_num == "p1"):
+		if velocity != Vector2.ZERO:
+			GameManager.is_moving1 = true
+		else:
+			GameManager.is_moving1 = false
+	elif(player_num == "p2"):
+		if velocity != Vector2.ZERO:
+			GameManager.is_moving2 = true
+		else:
+			GameManager.is_moving2 = false
+	
 	update_facing_direction()
 	handle_disable_delay()
 	move_and_slide()
@@ -122,7 +133,7 @@ func handle_disable_delay():
 			
 func update_facing_direction():
 	if velocity.length() > 0:  # Ensure there is movement
-		head_sprite.rotation = velocity.angle() + 90
+		head_sprite.rotation = velocity.angle() 
 
 
 

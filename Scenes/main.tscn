@@ -1,14 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://bj032pb7i6qnl"]
+[gd_scene load_steps=11 format=3 uid="uid://bj032pb7i6qnl"]
 
 [ext_resource type="PackedScene" uid="uid://bcu48fu3o1erv" path="res://Characters/player.tscn" id="1_pucg1"]
 [ext_resource type="Script" path="res://Scenes/back_end.gd" id="1_ry06c"]
 [ext_resource type="Texture2D" uid="uid://bgrwg3hakm5st" path="res://art/background/dirt.png" id="2_rad5m"]
+[ext_resource type="Texture2D" uid="uid://dwwj0i3m8yxs1" path="res://art/worm/head2.png" id="3_0kdr8"]
+[ext_resource type="Texture2D" uid="uid://bh7npihwca0cp" path="res://art/background/rock.png" id="4_4x756"]
+[ext_resource type="Texture2D" uid="uid://d2utp28gnjqge" path="res://art/worm/middle2.png" id="4_m8005"]
+[ext_resource type="Texture2D" uid="uid://by4yck0yrkxml" path="res://art/worm/tail2.png" id="5_jcfwj"]
+[ext_resource type="Texture2D" uid="uid://bntibqand2b40" path="res://art/worm/apple2.png" id="6_hl4jr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fadba"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_02v2u"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5lk0a"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ry06c")
@@ -19,6 +22,21 @@ position = Vector2(-457, -57)
 [node name="Player2" parent="." instance=ExtResource("1_pucg1")]
 position = Vector2(590, -34)
 player_num = "p2"
+
+[node name="HeadSprite" parent="Player2" index="0"]
+texture = ExtResource("3_0kdr8")
+
+[node name="Sprite2D" parent="Player2/Segment 1/Segment 1 Col" index="0"]
+texture = ExtResource("4_m8005")
+
+[node name="Sprite2D" parent="Player2/Segment 2/Segment 2 Col" index="0"]
+texture = ExtResource("4_m8005")
+
+[node name="Sprite2D" parent="Player2/Segment 3/Segment 3 Col" index="0"]
+texture = ExtResource("5_jcfwj")
+
+[node name="Sprite2D" parent="Player2/Segment 4/PlayerTail" index="0"]
+texture = ExtResource("6_hl4jr")
 
 [node name="Dirt" type="Sprite2D" parent="."]
 z_index = -1
@@ -70,5 +88,209 @@ shape = SubResource("CircleShape2D_02v2u")
 debug_color = Color(0.321569, 0.513726, 0.929412, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Rock"]
-scale = Vector2(17.03, 17.03)
-texture = SubResource("PlaceholderTexture2D_5lk0a")
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4x756")
+hframes = 2
+vframes = 2
+
+[node name="Rock2" type="StaticBody2D" parent="."]
+position = Vector2(-597, -607)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock2"]
+shape = SubResource("CircleShape2D_02v2u")
+debug_color = Color(0.321569, 0.513726, 0.929412, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock2"]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4x756")
+hframes = 2
+vframes = 2
+frame = 1
+
+[node name="Rock3" type="StaticBody2D" parent="."]
+position = Vector2(504, -700)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock3"]
+shape = SubResource("CircleShape2D_02v2u")
+debug_color = Color(0.321569, 0.513726, 0.929412, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock3"]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4x756")
+hframes = 2
+vframes = 2
+frame = 3
+
+[node name="Rock4" type="StaticBody2D" parent="."]
+position = Vector2(141, -454)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock4"]
+shape = SubResource("CircleShape2D_02v2u")
+debug_color = Color(0.321569, 0.513726, 0.929412, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock4"]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4x756")
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="Rock5" type="StaticBody2D" parent="."]
+position = Vector2(655, 481)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock5"]
+shape = SubResource("CircleShape2D_02v2u")
+debug_color = Color(0.321569, 0.513726, 0.929412, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock5"]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4x756")
+hframes = 2
+vframes = 2
+frame = 1
+
+[node name="Rock13" type="StaticBody2D" parent="."]
+position = Vector2(304, 723)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock13"]
+shape = SubResource("CircleShape2D_02v2u")
+debug_color = Color(0.321569, 0.513726, 0.929412, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock13"]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4x756")
+hframes = 2
+vframes = 2
+
+[node name="Rock6" type="StaticBody2D" parent="."]
+position = Vector2(-94, 348)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock6"]
+shape = SubResource("CircleShape2D_02v2u")
+debug_color = Color(0.321569, 0.513726, 0.929412, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock6"]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4x756")
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="Rock7" type="StaticBody2D" parent="."]
+position = Vector2(241, -8)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock7"]
+shape = SubResource("CircleShape2D_02v2u")
+debug_color = Color(0.321569, 0.513726, 0.929412, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock7"]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4x756")
+hframes = 2
+vframes = 2
+
+[node name="Rock8" type="StaticBody2D" parent="."]
+position = Vector2(-671, 373)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock8"]
+shape = SubResource("CircleShape2D_02v2u")
+debug_color = Color(0.321569, 0.513726, 0.929412, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock8"]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4x756")
+hframes = 2
+vframes = 2
+frame = 3
+
+[node name="Rock9" type="StaticBody2D" parent="."]
+position = Vector2(-404, 665)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock9"]
+shape = SubResource("CircleShape2D_02v2u")
+debug_color = Color(0.321569, 0.513726, 0.929412, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock9"]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4x756")
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="Rock10" type="StaticBody2D" parent="."]
+position = Vector2(658, -336)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock10"]
+shape = SubResource("CircleShape2D_02v2u")
+debug_color = Color(0.321569, 0.513726, 0.929412, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock10"]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4x756")
+hframes = 2
+vframes = 2
+frame = 1
+
+[node name="Rock11" type="StaticBody2D" parent="."]
+position = Vector2(-678, -265)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock11"]
+shape = SubResource("CircleShape2D_02v2u")
+debug_color = Color(0.321569, 0.513726, 0.929412, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock11"]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4x756")
+hframes = 2
+vframes = 2
+
+[node name="Rock12" type="StaticBody2D" parent="."]
+position = Vector2(-147, -718)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock12"]
+shape = SubResource("CircleShape2D_02v2u")
+debug_color = Color(0.321569, 0.513726, 0.929412, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock12"]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4x756")
+hframes = 2
+vframes = 2
+
+[editable path="Player2"]

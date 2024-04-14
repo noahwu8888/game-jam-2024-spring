@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 # Player speed and dash settings
-@export var max_speed: float = 500.0  # Maximum speed of the player
+@export var max_speed: float = 700.0  # Maximum speed of the player
 
 
 # Drag and acceleration settings

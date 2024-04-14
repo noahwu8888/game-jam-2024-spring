@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://bcu48fu3o1erv"]
 
-[ext_resource type="Texture2D" uid="uid://dqa218giik488" path="res://icon.svg" id="1_f67gv"]
 [ext_resource type="Script" path="res://Characters/player.gd" id="1_x6322"]
 [ext_resource type="Texture2D" uid="uid://cel63e62477jm" path="res://art/worm/head1.png" id="2_umtqc"]
 [ext_resource type="Script" path="res://Characters/segment_face.gd" id="3_5rki2"]
 [ext_resource type="Script" path="res://Characters/player2.gd" id="3_kryqy"]
 [ext_resource type="Texture2D" uid="uid://cj24i5tf1abpi" path="res://art/worm/middle1.png" id="4_by1dl"]
 [ext_resource type="Texture2D" uid="uid://88w4l7sg1hon" path="res://art/worm/tail1.png" id="5_on5tw"]
+[ext_resource type="Texture2D" uid="uid://7s0an7xun1ig" path="res://art/worm/apple1.png" id="7_7ejnd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k5h2r"]
 
@@ -23,7 +23,6 @@ script = ExtResource("1_x6322")
 
 [node name="HeadSprite" type="Sprite2D" parent="."]
 light_mask = 0
-position = Vector2(0, -4.335)
 scale = Vector2(0.015, 0.015)
 texture = ExtResource("2_umtqc")
 
@@ -64,7 +63,6 @@ script = ExtResource("3_5rki2")
 prev_segment = NodePath("../../HeadCollision")
 
 [node name="Sprite2D" type="Sprite2D" parent="Segment 1/Segment 1 Col"]
-rotation = 1.5708
 scale = Vector2(0.015, 0.015)
 texture = ExtResource("4_by1dl")
 
@@ -88,7 +86,6 @@ script = ExtResource("3_5rki2")
 prev_segment = NodePath("../../Segment 1/Segment 1 Col")
 
 [node name="Sprite2D" type="Sprite2D" parent="Segment 2/Segment 2 Col"]
-rotation = 1.5708
 scale = Vector2(0.015, 0.015)
 texture = ExtResource("4_by1dl")
 
@@ -114,7 +111,6 @@ prev_segment = NodePath("../../Segment 2/Segment 2 Col")
 
 [node name="Sprite2D" type="Sprite2D" parent="Segment 3/Segment 3 Col"]
 position = Vector2(0, 4.395)
-rotation = 1.5708
 scale = Vector2(0.015, 0.015)
 texture = ExtResource("5_on5tw")
 
@@ -142,14 +138,11 @@ contact_monitor = true
 script = ExtResource("3_kryqy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Segment 4/PlayerTail"]
-modulate = Color(0.968627, 0, 0, 1)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_f67gv")
+scale = Vector2(0.015, 0.015)
+texture = ExtResource("7_7ejnd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Segment 4/PlayerTail"]
 shape = SubResource("CircleShape2D_nignx")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwsgfpfoe80nv"]
+[gd_scene load_steps=5 format=3 uid="uid://bwsgfpfoe80nv"]
 
 [ext_resource type="Script" path="res://Scenes/Game.gd" id="1_3xtsx"]
 [ext_resource type="PackedScene" uid="uid://bj032pb7i6qnl" path="res://Scenes/main.tscn" id="1_g0x63"]
+[ext_resource type="AudioStream" uid="uid://4viyar0qn7og" path="res://sounds/Roar_1.wav" id="3_talhk"]
+[ext_resource type="AudioStream" uid="uid://c03d60xx7lk8" path="res://sounds/Music-Boss_3.mp3" id="4_jecve"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_3xtsx")
@@ -99,6 +101,13 @@ offset_bottom = 105.92
 scale = Vector2(3.67, 3.67)
 text = "Replay?"
 icon_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_talhk")
+
+[node name="BossMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_jecve")
+volume_db = 2.971
 
 [connection signal="pressed" from="TitleScreen/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="GameOverScreen/RestartButton" to="." method="_on_restart_button_pressed"]

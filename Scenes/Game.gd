@@ -31,7 +31,12 @@ func _ready():
 	
 	# Push items to GameManager
 	GameManager.game_screen = self
-	
+
+func _process(delta):
+	if(GameManager.is_moving1 or GameManager.is_moving2):
+		if(!$AudioStreamPlayer2D.playing):
+			$AudioStreamPlayer2D.playing = true
+
 func start_game():
 	title_screen.visible = false
 	game_screen.visible = true
@@ -43,6 +48,7 @@ func end_game():
 	GameManager.can_move = false
 
 func _on_start_button_pressed():
+	$BossMusic.playing = true
 	start_game()
 
 
