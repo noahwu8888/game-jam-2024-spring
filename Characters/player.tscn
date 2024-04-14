@@ -20,7 +20,7 @@ one_shot = true
 
 [node name="DisableSegmentTimer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 0.1
+wait_time = 0.05
 
 [node name="ReenableSegmentTimer" type="Timer" parent="."]
 process_callback = 0
@@ -30,7 +30,7 @@ wait_time = 0.1
 shape = SubResource("CircleShape2D_nignx")
 
 [node name="HeadSprite" type="Sprite2D" parent="."]
-modulate = Color(0.933333, 0.45098, 0.745098, 1)
+modulate = Color(0.172549, 0.756863, 0.294118, 1)
 light_mask = 0
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_f67gv")
@@ -117,16 +117,21 @@ position = Vector2(1, 26)
 collision_mask = 7
 gravity_scale = 0.0
 lock_rotation = true
+custom_integrator = true
+continuous_cd = 1
+max_contacts_reported = 2
+contact_monitor = true
 script = ExtResource("3_kryqy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Segment 4/PlayerTail"]
 shape = SubResource("CircleShape2D_nignx")
 
 [node name="Sprite2D" type="Sprite2D" parent="Segment 4/PlayerTail"]
-modulate = Color(0.933333, 0.45098, 0.745098, 1)
+modulate = Color(0.968627, 0, 0, 1)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_f67gv")
 
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="DisableSegmentTimer" to="." method="_on_disable_segment_timer_timeout"]
 [connection signal="timeout" from="ReenableSegmentTimer" to="." method="_on_reenable_segment_timer_timeout"]
+[connection signal="body_entered" from="Segment 4/PlayerTail" to="." method="_on_player_tail_body_entered"]

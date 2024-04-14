@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var head_sprite = $HeadSprite
-
+@onready var head = $"."
 #Tail and segments
 @export var player_num: String = "p1"
 @onready var tail_body:RigidBody2D = $"Segment 4/PlayerTail"
@@ -101,6 +101,7 @@ func start_dash(direction: Vector2):
 	## disable all collision
 	#for child in segments:
 		#child.disabled = true
+	segments[disable_delay_count].set_collision_layer_value(1, false)
 	segments[disable_delay_count].set_collision_mask_value(1, false)
 	segments[disable_delay_count].set_collision_mask_value(2, false)
 	disable_delay_iterate = true
@@ -122,6 +123,7 @@ func update_facing_direction():
 func _on_disable_segment_timer_timeout():
 	if disable_delay_count < segments.size():
 		print(disable_delay_count)
+		segments[disable_delay_count].set_collision_layer_value(1, false)
 		segments[disable_delay_count].set_collision_mask_value(1, false)
 		segments[disable_delay_count].set_collision_mask_value(2, false)
 		disable_delay_count += 1
@@ -135,6 +137,7 @@ func _on_disable_segment_timer_timeout():
 func _on_reenable_segment_timer_timeout():
 	if reenable_delay_count < segments.size():
 		print(reenable_delay_count)
+		segments[reenable_delay_count].set_collision_layer_value(1, true)
 		segments[reenable_delay_count].set_collision_mask_value(1, true)
 		segments[reenable_delay_count].set_collision_mask_value(2, true)
 		reenable_delay_count += 1
@@ -148,3 +151,8 @@ func _on_dash_cooldown_timeout():
 	can_dash = true
 
 
+
+
+func _on_player_tail_body_entered(body):
+	if(body is CharacterBody2D and body != head):
+		print("End Game")
