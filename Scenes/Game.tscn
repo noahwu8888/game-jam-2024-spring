@@ -97,7 +97,7 @@ offset_top = 482.0
 offset_right = -15.235
 offset_bottom = 105.92
 scale = Vector2(3.67, 3.67)
-text = "Start"
+text = "Replay?"
 icon_alignment = 1
 
 [connection signal="pressed" from="TitleScreen/StartButton" to="." method="_on_start_button_pressed"]

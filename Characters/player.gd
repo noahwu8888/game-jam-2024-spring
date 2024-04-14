@@ -107,7 +107,7 @@ func start_dash(direction: Vector2):
 	segments[disable_delay_count].set_collision_layer_value(1, false)
 	segments[disable_delay_count].set_collision_mask_value(1, false)
 	segments[disable_delay_count].set_collision_mask_value(2, false)
-	
+	segments[disable_delay_count].get_child(0).modulate.a = .5
 	$Area2D/CollisionShape2D.disabled = true
 	
 	disable_delay_iterate = true
@@ -122,13 +122,14 @@ func handle_disable_delay():
 			
 func update_facing_direction():
 	if velocity.length() > 0:  # Ensure there is movement
-		head_sprite.rotation = velocity.angle()
+		head_sprite.rotation = velocity.angle() + 90
 
 
 
 func _on_disable_segment_timer_timeout():
 	if disable_delay_count < segments.size():
 		print(disable_delay_count)
+		segments[disable_delay_count].get_child(0).modulate.a = .5
 		segments[disable_delay_count].set_collision_layer_value(1, false)
 		segments[disable_delay_count].set_collision_mask_value(1, false)
 		segments[disable_delay_count].set_collision_mask_value(2, false)
@@ -143,6 +144,7 @@ func _on_disable_segment_timer_timeout():
 func _on_reenable_segment_timer_timeout():
 	if reenable_delay_count < segments.size():
 		print(reenable_delay_count)
+		segments[reenable_delay_count].get_child(0).modulate.a = 1
 		segments[reenable_delay_count].set_collision_layer_value(1, true)
 		segments[reenable_delay_count].set_collision_mask_value(1, true)
 		segments[reenable_delay_count].set_collision_mask_value(2, true)

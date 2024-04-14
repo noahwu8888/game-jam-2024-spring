@@ -6,9 +6,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fadba"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ijtxb"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_02v2u"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5lk0a"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ry06c")
@@ -34,10 +34,6 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
 shape = SubResource("RectangleShape2D_fadba")
-
-[node name="Sprite2D" type="Sprite2D" parent="LeftWall/CollisionShape2D"]
-scale = Vector2(23, 19.9636)
-texture = SubResource("PlaceholderTexture2D_ijtxb")
 
 [node name="RightWall" type="StaticBody2D" parent="."]
 position = Vector2(1010, 0)
@@ -72,3 +68,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rock"]
 shape = SubResource("CircleShape2D_02v2u")
 debug_color = Color(0.321569, 0.513726, 0.929412, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock"]
+scale = Vector2(17.03, 17.03)
+texture = SubResource("PlaceholderTexture2D_5lk0a")
