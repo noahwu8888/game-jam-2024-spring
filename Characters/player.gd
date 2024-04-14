@@ -85,7 +85,7 @@ func _physics_process(delta: float) -> void:
 	# handle_player_2_movement()
 
 	# Check for dash input
-	if Input.is_action_just_pressed("ui_accept") and not is_dashing and can_dash:
+	if Input.is_action_just_pressed(player_num + "_dash") and not is_dashing and can_dash:
 		start_dash(input_vector)
 		dash_cooldown.start()
 
