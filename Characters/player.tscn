@@ -11,7 +11,7 @@
 size = Vector2(20, 20.5)
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 3
+collision_mask = 7
 script = ExtResource("1_x6322")
 
 [node name="DashCooldown" type="Timer" parent="."]
@@ -44,7 +44,7 @@ stiffness = 64.0
 
 [node name="Segment 1 Col" type="RigidBody2D" parent="Segment 1" node_paths=PackedStringArray("prev_segment")]
 position = Vector2(0, 25)
-collision_mask = 3
+collision_mask = 7
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("3_5rki2")
@@ -67,7 +67,7 @@ stiffness = 64.0
 
 [node name="Segment 2 Col" type="RigidBody2D" parent="Segment 2" node_paths=PackedStringArray("prev_segment")]
 position = Vector2(0, 25)
-collision_mask = 3
+collision_mask = 7
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("3_5rki2")
@@ -90,7 +90,7 @@ stiffness = 64.0
 
 [node name="Segment 3 Col" type="RigidBody2D" parent="Segment 3" node_paths=PackedStringArray("prev_segment")]
 position = Vector2(0, 25)
-collision_mask = 3
+collision_mask = 7
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("3_5rki2")
@@ -114,7 +114,7 @@ stiffness = 64.0
 
 [node name="PlayerTail" type="RigidBody2D" parent="Segment 4"]
 position = Vector2(1, 26)
-collision_mask = 3
+collision_mask = 7
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("3_kryqy")
