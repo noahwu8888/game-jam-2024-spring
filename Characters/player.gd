@@ -45,7 +45,8 @@ func _ready():
 					segments.append(subChild)
 					
 		
-
+func _process(delta):
+	pass
 
 func _physics_process(delta: float) -> void:
 	var input_vector: Vector2 = Vector2.ZERO
@@ -106,6 +107,9 @@ func start_dash(direction: Vector2):
 	segments[disable_delay_count].set_collision_layer_value(1, false)
 	segments[disable_delay_count].set_collision_mask_value(1, false)
 	segments[disable_delay_count].set_collision_mask_value(2, false)
+	
+	$Area2D/CollisionShape2D.disabled = true
+	
 	disable_delay_iterate = true
 
 func handle_disable_delay():
@@ -145,6 +149,7 @@ func _on_reenable_segment_timer_timeout():
 		reenable_delay_count += 1
 	else:
 		print("Stopped")
+		$Area2D/CollisionShape2D.disabled = false
 		reenable_delay_timer.stop()
 		reenable_delay_count = 0
 		reenable_delay_iterate = false
@@ -155,7 +160,14 @@ func _on_dash_cooldown_timeout():
 
 
 
-func _on_player_tail_body_entered(body):
-	if(body is CharacterBody2D and body != head):
-		print("End Game")
-		GameManager.end_game()
+
+
+
+func _on_area_2d_body_entered(body):
+	if(body is RigidBody2D and body.get_groups().has("tail")):
+		if(body.player_num != player_num):
+			print("End Game")
+			GameManager.win_player = player_num
+			GameManager.end_game()
+
+

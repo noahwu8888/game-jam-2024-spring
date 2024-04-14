@@ -1,8 +1,12 @@
 extends Node
 
 @onready var game_screen = $HBoxContainer
+
 @onready var title_screen = $TitleScreen
 @onready var button = $TitleScreen/Button
+
+@onready var game_over_screen = $GameOverScreen
+@onready var win_text = $GameOverScreen/Label
 
 @onready var players := {
 	"1": {
@@ -33,10 +37,15 @@ func start_game():
 	game_screen.visible = true
 	GameManager.can_move = true
 func end_game():
-	title_screen.visible = true
+	game_over_screen.visible = true
+	win_text.text = "Game Over, " + GameManager.win_player + " wins!"
 	game_screen.visible = false
 	GameManager.can_move = false
 
-
-func _on_button_pressed():
+func _on_start_button_pressed():
 	start_game()
+
+
+
+func _on_restart_button_pressed():
+	get_tree().reload_current_scene()

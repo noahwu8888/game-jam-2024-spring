@@ -1,18 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcu48fu3o1erv"]
+[gd_scene load_steps=9 format=3 uid="uid://bcu48fu3o1erv"]
 
 [ext_resource type="Texture2D" uid="uid://dqa218giik488" path="res://icon.svg" id="1_f67gv"]
 [ext_resource type="Script" path="res://Characters/player.gd" id="1_x6322"]
 [ext_resource type="Script" path="res://Characters/segment_face.gd" id="3_5rki2"]
 [ext_resource type="Script" path="res://Characters/player2.gd" id="3_kryqy"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_nignx"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_k5h2r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h7puq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_elgeh"]
 size = Vector2(20, 20.5)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_nignx"]
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 7
 script = ExtResource("1_x6322")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(1.25, 1.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_k5h2r")
 
 [node name="DashCooldown" type="Timer" parent="."]
 wait_time = 2.0
@@ -27,7 +37,7 @@ process_callback = 0
 wait_time = 0.1
 
 [node name="HeadCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_nignx")
+shape = SubResource("CircleShape2D_h7puq")
 
 [node name="HeadSprite" type="Sprite2D" parent="."]
 modulate = Color(0.172549, 0.756863, 0.294118, 1)
@@ -89,6 +99,7 @@ length = 25.0
 stiffness = 64.0
 
 [node name="Segment 3 Col" type="RigidBody2D" parent="Segment 3" node_paths=PackedStringArray("prev_segment")]
+process_priority = -1
 position = Vector2(0, 25)
 collision_mask = 7
 gravity_scale = 0.0
@@ -112,7 +123,7 @@ bias = 0.9
 length = 25.0
 stiffness = 64.0
 
-[node name="PlayerTail" type="RigidBody2D" parent="Segment 4"]
+[node name="PlayerTail" type="RigidBody2D" parent="Segment 4" groups=["tail"]]
 position = Vector2(1, 26)
 collision_mask = 7
 gravity_scale = 0.0
@@ -131,7 +142,7 @@ modulate = Color(0.968627, 0, 0, 1)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_f67gv")
 
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="DisableSegmentTimer" to="." method="_on_disable_segment_timer_timeout"]
 [connection signal="timeout" from="ReenableSegmentTimer" to="." method="_on_reenable_segment_timer_timeout"]
-[connection signal="body_entered" from="Segment 4/PlayerTail" to="." method="_on_player_tail_body_entered"]

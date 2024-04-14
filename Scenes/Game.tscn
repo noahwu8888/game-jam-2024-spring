@@ -54,7 +54,7 @@ grow_vertical = 2
 [node name="Sprite2D" type="Sprite2D" parent="TitleScreen"]
 position = Vector2(959, 224)
 
-[node name="Button" type="Button" parent="TitleScreen"]
+[node name="StartButton" type="Button" parent="TitleScreen"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 21.833
@@ -67,4 +67,38 @@ scale = Vector2(3.67, 3.67)
 text = "Start"
 icon_alignment = 1
 
-[connection signal="pressed" from="TitleScreen/Button" to="." method="_on_button_pressed"]
+[node name="GameOverScreen" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1880.0
+offset_bottom = -1040.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GameOverScreen"]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 271.0
+offset_right = 823.0
+offset_bottom = 294.0
+scale = Vector2(3.765, 3.765)
+text = "Game Over, p3 wins!"
+
+[node name="RestartButton" type="Button" parent="GameOverScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 21.833
+anchor_bottom = 10.177
+offset_left = 738.0
+offset_top = 482.0
+offset_right = -15.235
+offset_bottom = 105.92
+scale = Vector2(3.67, 3.67)
+text = "Start"
+icon_alignment = 1
+
+[connection signal="pressed" from="TitleScreen/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="GameOverScreen/RestartButton" to="." method="_on_restart_button_pressed"]

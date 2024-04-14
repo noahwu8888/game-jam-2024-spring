@@ -44,4 +44,4 @@ func _physics_process(delta: float) -> void:
 	if input_vector == Vector2.ZERO and linear_velocity.length() > 0:
 		linear_velocity = linear_velocity.move_toward(Vector2.ZERO, stop_drag * delta)
 		
-		
+
