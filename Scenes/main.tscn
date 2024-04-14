@@ -1,10 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bj032pb7i6qnl"]
+[gd_scene load_steps=6 format=3 uid="uid://bj032pb7i6qnl"]
 
 [ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="1_580ae"]
 [ext_resource type="PackedScene" uid="uid://bcu48fu3o1erv" path="res://Characters/player.tscn" id="1_pucg1"]
 [ext_resource type="Texture2D" uid="uid://bgrwg3hakm5st" path="res://art/background/dirt.png" id="2_rad5m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fadba"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_02v2u"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -57,3 +59,13 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
 shape = SubResource("RectangleShape2D_fadba")
+
+[node name="Rock" type="StaticBody2D" parent="."]
+position = Vector2(-205, -126)
+scale = Vector2(4, 4)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock"]
+shape = SubResource("CircleShape2D_02v2u")
+debug_color = Color(0.321569, 0.513726, 0.929412, 1)

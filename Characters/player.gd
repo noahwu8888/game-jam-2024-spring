@@ -34,15 +34,15 @@ var reenable_delay_iterate = false
 func _ready():
 	tail_body.player_num = player_num
 	
-	
+	segments.append(self)
 	for child in self.get_children():
-		if child is CollisionShape2D:
+		if child is RigidBody2D:
 			segments.append(child)
 		if child.get_child_count() >= 0:
 			for subChild in child.get_children():
-				for subSubChild in subChild.get_children():
-					if subSubChild is CollisionShape2D:
-						segments.append(subSubChild)
+				if subChild is RigidBody2D:
+					segments.append(subChild)
+					
 		
 
 
@@ -101,6 +101,8 @@ func start_dash(direction: Vector2):
 	## disable all collision
 	#for child in segments:
 		#child.disabled = true
+	segments[disable_delay_count].set_collision_mask_value(1, false)
+	segments[disable_delay_count].set_collision_mask_value(2, false)
 	disable_delay_iterate = true
 
 func handle_disable_delay():
@@ -120,7 +122,8 @@ func update_facing_direction():
 func _on_disable_segment_timer_timeout():
 	if disable_delay_count < segments.size():
 		print(disable_delay_count)
-		segments[disable_delay_count].disabled = !segments[disable_delay_count].disabled
+		segments[disable_delay_count].set_collision_mask_value(1, false)
+		segments[disable_delay_count].set_collision_mask_value(2, false)
 		disable_delay_count += 1
 	else:
 		print("Stopped")
@@ -132,7 +135,8 @@ func _on_disable_segment_timer_timeout():
 func _on_reenable_segment_timer_timeout():
 	if reenable_delay_count < segments.size():
 		print(reenable_delay_count)
-		segments[reenable_delay_count].disabled = !segments[reenable_delay_count].disabled
+		segments[reenable_delay_count].set_collision_mask_value(1, true)
+		segments[reenable_delay_count].set_collision_mask_value(2, true)
 		reenable_delay_count += 1
 	else:
 		print("Stopped")
